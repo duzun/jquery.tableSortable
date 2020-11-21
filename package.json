@@ -1,0 +1,75 @@
+{
+  "name": "jquery-tablesortable",
+  "title": "Makes a table sortable by clicking header cells",
+  "description": "A jQuery Plugin to make a table sortable by clicking header cells",
+  "version": "0.0.1",
+  "homepage": "https://github.com/duzun/jquery.tableSortable",
+  "author": {
+    "name": "Dumitru Uzun",
+    "email": "contact@duzun.me",
+    "url": "https://DUzun.Me"
+  },
+  "types": "tableSortable.d.ts",
+  "module": "dist/tableSortable.esm.js",
+  "main": "dist/tableSortable.js",
+  "unpkg": "dist/tableSortable.min.js",
+  "reveal": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/duzun/jquery.tableSortable.git"
+  },
+  "bugs": "https://github.com/duzun/jquery.tableSortable/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/duzun/jquery.tableSortable/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "^3.5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@types/jquery": "^3.5.3",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "verup": "^1.7"
+  },
+  "scripts": {
+    "tsc": "npx tsc --build",
+    "rollup": "npx rollup -c rollup.config.js",
+    "build": "npm run tsc && npm run rollup",
+    "verup": "verup"
+  },
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "jquery",
+    "table",
+    "sort",
+    "tableSortable"
+  ],
+  "extra": {
+    "verup": {
+      "files": [
+        "tableSortable.esm.ts"
+      ]
+    }
+  },
+  "jshintConfig": {
+    "esversion": 9,
+    "laxbreak": true,
+    "laxcomma": true,
+    "undef": true,
+    "unused": true,
+    "sub": true,
+    "expr": true,
+    "bitwise": false,
+    "eqeqeq": false,
+    "boss": true,
+    "eqnull": true,
+    "scripturl": true,
+    "-W041": false
+  }
+}

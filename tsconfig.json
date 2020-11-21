@@ -1,0 +1,18 @@
+{
+  "compileOnSave": false,
+  "declaration": true,
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "es2015",
+    "outDir": "dist",
+    "sourceMap": false
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "files": [
+    "tableSortable.d.ts",
+    "tableSortable.esm.ts"
+  ]
+}
