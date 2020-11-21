@@ -9,14 +9,19 @@
      *
      * @license MIT
      * @author Dumitru Uzun (DUzun.Me)
-     * @version 1.0.0
+     * @version 0.0.2
      */
     function initTableSortable($) {
       var CLICK_TH_SELECTOR = 'th:not(.nosort),td.sort';
       var sort_dir;
+      var cmp;
+      var defaults = {
+        cmp: undefined
+      };
 
-      var tableSortable = function tableSortable() {
-        // Mark the table as initialized
+      var tableSortable = function tableSortable(options) {
+        options = $.extend({}, defaults, options); // Mark the table as initialized
+
         this.addClass('table_sortable');
         var $thead = this.children('thead');
         var $tbody = this.children('tbody');
@@ -54,7 +59,8 @@
             ret.tr = tr;
             return ret;
           });
-          sort_dir = sortOrder;
+          sort_dir = sortOrder > 0 ? 1 : -1;
+          cmp = options.cmp;
           rows.sort(cmpArr);
           $tbody.append(rows.map(function (row) {
             return row.tr;
@@ -69,6 +75,7 @@
 
         _a.some(function (a, idx) {
           var b = _b[idx];
+          if (cmp) return ret = cmp(a[0], b[0]);
 
           if (1 in a && 1 in b && (ret = a[1] - b[1])) {
             return ret;
@@ -77,13 +84,12 @@
             var val2 = b[0];
 
             if (val1 != val2) {
-              ret = val1 < val2 ? -1 : 1;
-              return ret;
+              return ret = val1 < val2 ? -1 : 1;
             }
           }
         });
 
-        return ret * (sort_dir > 0 ? 1 : -1);
+        return ret * sort_dir;
       } // Calc _cols_ indexes, respecting colspan and rowspan in headers
 
 
@@ -126,6 +132,7 @@
         });
       }
 
+      tableSortable.defaults = defaults;
       $.fn.tableSortable = tableSortable;
       return tableSortable;
     } // Auto-init in browser when jQuery or Zepto is present
