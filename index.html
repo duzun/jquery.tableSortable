@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf8" />
+  <title>A jQuery Plugin to make a table sortable by clicking header cells</title>
+  <style>
+    table thead th {
+      cursor: pointer;
+    }
+
+    table thead th.nosort {
+      cursor: initial;
+    }
+
+    .table_sortable thead th:after {
+        display: inline-block;
+        padding: 0 .25rem;
+    }
+
+    .table_sortable thead th.desc:after {
+        content: '↑';
+    }
+
+    .table_sortable thead th.asc:after {
+        content: '↓';
+    }
+  </style>
+</head>
+<body>
+  <table id="myTable" border="1">
+      <thead>
+          <tr>
+              <th rowspan="2" class="nosort" title="nosort">Nr.</th>
+              <th rowspan="2">Name</th>
+              <th colspan="2">Order</th>
+          </tr>
+          <tr>
+              <th>number</th>
+              <th>text</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>1.</td>
+              <td>Nikola</td>
+              <td>2</td>
+              <td>Tesla</td>
+          </tr>
+          <tr>
+              <td>2.</td>
+              <td>John</td>
+              <td>0</td>
+              <td>Miller</td>
+          </tr>
+          <tr>
+              <td>3.</td>
+              <td>Jacque</td>
+              <td>1</td>
+              <td>Fresco</td>
+          </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>-</td>
+          <td><a href="https://github.com/duzun/jquery.tableSortable">GitHub</a></td>
+          <td>-</td>
+          <td><a href="https://www.npmjs.com/package/jquery-tablesortable">npm</a></td>
+        </tr>
+      </tfoot>
+  </table>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/jquery-tablesortable"></script>
+  <script>$('table#myTable').tableSortable();</script>
+</body>
+</html>
