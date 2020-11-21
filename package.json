@@ -2,7 +2,7 @@
   "name": "jquery-tablesortable",
   "title": "Makes a table sortable by clicking header cells",
   "description": "A jQuery Plugin to make a table sortable by clicking header cells",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/duzun/jquery.tableSortable",
   "author": {
     "name": "Dumitru Uzun",

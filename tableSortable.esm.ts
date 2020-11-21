@@ -1,16 +1,24 @@
+type CmpItem = [string, number?]; // used internally
+
 /**
  * A simple jQuery plugin to sort table body by a selected column
  *
  * @license MIT
  * @author Dumitru Uzun (DUzun.Me)
- * @version 0.0.1
+ * @version 0.0.2
  */
 export default function initTableSortable($: JQueryStatic): TableSortablePlugin {
-    type CmpItem = [string, number?];
     const CLICK_TH_SELECTOR = 'th:not(.nosort),td.sort';
     let sort_dir: number;
+    let cmp: CmpFunction;
 
-    const tableSortable: TableSortablePlugin = function tableSortable() {
+    const defaults = {
+        cmp: undefined,
+    };
+
+    const tableSortable: TableSortablePlugin = function tableSortable(options?: TableSortableOptions) {
+        options = $.extend({}, defaults, options);
+
         // Mark the table as initialized
         this.addClass('table_sortable');
 
@@ -53,7 +61,8 @@ export default function initTableSortable($: JQueryStatic): TableSortablePlugin 
                 })
                 ;
 
-            sort_dir = sortOrder;
+            sort_dir = sortOrder > 0 ? 1 : -1;
+            cmp = options.cmp;
             rows.sort(cmpArr);
 
             $tbody.append(rows.map((row) => row.tr));
@@ -67,6 +76,8 @@ export default function initTableSortable($: JQueryStatic): TableSortablePlugin 
         let ret;
         _a.some((a, idx) => {
             let b = _b[idx];
+            if (cmp) return ret = cmp(a[0], b[0]);
+
             if (1 in a && 1 in b && (ret = a[1] - b[1])) {
                 return ret;
             }
@@ -74,12 +85,11 @@ export default function initTableSortable($: JQueryStatic): TableSortablePlugin 
                 let val1 = a[0];
                 let val2 = b[0];
                 if (val1 != val2) {
-                    ret = val1 < val2 ? -1 : 1;
-                    return ret;
+                    return ret = val1 < val2 ? -1 : 1;
                 }
             }
         });
-        return ret * (sort_dir > 0 ? 1 : -1);
+        return ret * sort_dir;
     }
 
     // Calc _cols_ indexes, respecting colspan and rowspan in headers
@@ -112,6 +122,8 @@ export default function initTableSortable($: JQueryStatic): TableSortablePlugin 
                 });
         });
     }
+
+    tableSortable.defaults = defaults;
 
     $.fn.tableSortable = tableSortable;
 

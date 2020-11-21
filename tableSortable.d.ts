@@ -1,8 +1,15 @@
+
+type CmpFunction = (a: string, b: string) => number;
+type TableSortableOptions = {
+    cmp?: CmpFunction
+};
+
 /**
  * $.fn.tableSortable()
  */
 interface TableSortablePlugin {
-    (): JQuery;
+    (options?: Object): JQuery;
+    defaults: TableSortableOptions;
 }
 
 /**

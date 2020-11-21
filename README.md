@@ -14,6 +14,9 @@ Import it after jQuery:
 
 ```js
 $('table#myTable').tableSortable();
+
+// custom comparison function
+$('table#myTable').tableSortable({ cmp: (a,b) => a < b ? -1 : 1 });
 ```
 
 Sample HTML:
